@@ -1,0 +1,42 @@
+Traceback (most recent call last):
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/jupyter_cache/executors/utils.py", line 56, in single_nb_execution
+    record_timing=False,
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/nbclient/client.py", line 1082, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/nbclient/util.py", line 74, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/nbclient/util.py", line 53, in just_run
+    return loop.run_until_complete(coro)
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/asyncio/base_events.py", line 587, in run_until_complete
+    return future.result()
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/nbclient/client.py", line 536, in async_execute
+    cell, index, execution_count=self.code_cells_executed + 1
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/nbclient/client.py", line 827, in async_execute_cell
+    self._check_raise_for_error(cell, exec_reply)
+  File "/home/jubayer/anaconda3/envs/dsn-template/lib/python3.7/site-packages/nbclient/client.py", line 735, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import screed # A Python library for reading FASTA and FASQ file format.
+def readFastaFile(inputfile):
+    """
+    Reads and returns file as FASTA format with special characters removed.
+    """
+    with screed.open(inputfile) as seqfile:
+        for read in seqfile:
+            seq = read.sequence
+    return seq 
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+[0;32m<ipython-input-1-35f0869c0e9a>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0;32mimport[0m [0mscreed[0m [0;31m# A Python library for reading FASTA and FASQ file format.[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0;32mdef[0m [0mreadFastaFile[0m[0;34m([0m[0minputfile[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m     """
+[1;32m      4[0m     [0mReads[0m [0;32mand[0m [0mreturns[0m [0mfile[0m [0;32mas[0m [0mFASTA[0m [0mformat[0m [0;32mwith[0m [0mspecial[0m [0mcharacters[0m [0mremoved[0m[0;34m.[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      5[0m     """
+
+[0;31mModuleNotFoundError[0m: No module named 'screed'
+ModuleNotFoundError: No module named 'screed'
+

@@ -1,0 +1,10 @@
+- file: index
+
+- part: Python Basics
+  chapters:
+  - file: notebooks/01-QuickPython
+  - file: notebooks/02-Intro to Data Visualization
+  - file: notebooks/03-Working with Text Sequence Data
+  - file: notebooks/04-Working with FASTA Sequence Data
+  - file: notebooks/05-Working with FASTQ Sequence Data
+  - file: notebooks/06-Handling FASTA & FASTQ with Screed Library

@@ -1,0 +1,31 @@
+#######################################################################################
+# Book settings
+title                         : Python for Bioinformatics
+author                        : Jubayer Hossain
+logo                          : 'logo.png'
+email                         : jubayer@hdrobd.org
+description: >-
+  NumPy for Scientific Computing
+
+execute:
+  execute_notebooks           : cache
+
+
+html:
+  favicon                     : 'favicon.png'
+  home_page_in_navbar         : false
+  use_edit_page_button        : false
+  use_repository_button       : true
+  use_issue_button            : false
+
+repository:
+  url                         : https://github.com/hossainlab/PY4B/
+  branch                      : master
+  path_to_book                : book
+
+
+launch_buttons:
+  notebook_interface          : classic
+  binderhub_url               : "https://mybinder.org"
+  colab_url                   : "https://colab.research.google.com"
+  thebe                       : true
