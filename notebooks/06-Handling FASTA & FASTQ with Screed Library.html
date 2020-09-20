@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <title>Most Common Databases and File Formats in Bioinfromatics &#8212; Python for Bioinformatics</title>
+    <title>Handling FASTA &amp; FASTQ with Screed Library &#8212; Python for Bioinformatics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
     <link href="../_static/css/index.css" rel="stylesheet">
     <link rel="stylesheet" href="../_static/sphinx-book-theme.css" type="text/css" />
@@ -35,6 +35,8 @@
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="DNA Sequence Statistics-I" href="07-DNA Sequence Statistics.html" />
+    <link rel="prev" title="Working with FASTQ Sequence" href="05-Working with FASTQ Sequence Data.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="docsearch:language" content="en">
@@ -89,7 +91,7 @@
   Working with Data
  </span>
 </p>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="03-Working with Text Sequence Data.html">
    Text Data Handling in Python
@@ -117,8 +119,8 @@
    Sequence
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="06-Handling FASTA &amp; FASTQ with Screed Library.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Handling
    <code class="docutils literal notranslate">
     <span class="pre">
@@ -200,7 +202,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/notebooks/2.2-Common Databases & File Formats in Bioinformatics.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/notebooks/06-Handling FASTA & FASTQ with Screed Library.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -237,7 +239,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/PY4B/master?urlpath=tree/book/notebooks/2.2-Common Databases & File Formats in Bioinformatics.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/hossainlab/PY4B/master?urlpath=tree/book/notebooks/06-Handling FASTA & FASTQ with Screed Library.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -245,7 +247,7 @@
         
         
         
-        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/PY4B/blob/master/book/notebooks/2.2-Common Databases & File Formats in Bioinformatics.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
+        <a class="colab-button" href="https://colab.research.google.com/github/hossainlab/PY4B/blob/master/book/notebooks/06-Handling FASTA & FASTQ with Screed Library.ipynb"><button type="button" class="btn btn-secondary topbarbtn"
                 title="Launch Colab" data-toggle="tooltip" data-placement="left"><img class="colab-button-logo"
                     src="../_static/images/logo_colab.png"
                     alt="Interact on Colab">Colab</button></a>
@@ -267,13 +269,8 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#databases-for-bioinformatics">
-   Databases for Bioinformatics
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#common-file-formats-in-bioinformatics">
-   Common File Formats in Bioinformatics
+  <a class="reference internal nav-link" href="#template-for-handling-fasta-and-fastq-with-screed">
+   Template for Handling FASTA and FASTQ with Screed
   </a>
  </li>
 </ul>
@@ -286,21 +283,126 @@
         
               <div>
                 
-  <div class="section" id="most-common-databases-and-file-formats-in-bioinfromatics">
-<h1>Most Common Databases and File Formats in Bioinfromatics<a class="headerlink" href="#most-common-databases-and-file-formats-in-bioinfromatics" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="databases-for-bioinformatics">
-<h2>Databases for Bioinformatics<a class="headerlink" href="#databases-for-bioinformatics" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>https://www.longdom.org/scholarly/bioinformatics-databases-journals-articles-ppts-list-2876.html#:~:text=A%20few%20popular%20databases%20are,repositories%20of%20known%20genetic%20sequences.</p></li>
-</ul>
+  <div class="section" id="handling-fasta-fastq-with-screed-library">
+<h1>Handling <code class="docutils literal notranslate"><span class="pre">FASTA</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">FASTQ</span></code> with Screed Library<a class="headerlink" href="#handling-fasta-fastq-with-screed-library" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">screed</span>
+<span class="k">with</span> <span class="n">screed</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;../data/Haemophilus_influenzae.fasta&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">seqfile</span><span class="p">:</span> 
+    <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">seqfile</span><span class="p">:</span>
+        <span class="n">seq</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">sequence</span>    
+        <span class="n">name</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">name</span> 
+</pre></div>
 </div>
-<div class="section" id="common-file-formats-in-bioinformatics">
-<h2>Common File Formats in Bioinformatics<a class="headerlink" href="#common-file-formats-in-bioinformatics" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>https://bioinformatics.uconn.edu/resources-and-events/tutorials-2/file-formats-tutorial/</p></li>
-<li><p>http://rice.plantbiology.msu.edu/training/Childs_Data_Formats.pdf</p></li>
-<li><p>https://snipcademy.com/sequence-file-formats</p></li>
-</ul>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CP005967.1 Haemophilus influenzae KR494, complete genome
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seq</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;AACCGAAATTACAGTGCATGGACGCACAAAATCTGATGGTTATCGTGCTGATAGAATTAATTGGAAAAAAATTGGTAAAGTCCGAGAGCGTTTATCCATTCCTGTTATTGCTAACGGAGAAATTTGGCATTGGCAAGATGGTCAAGATTGCTTATCTCAAACAGGTTGTCAGGATTTAATGGTGGGACGAGGTGCATTGAATATTCCGAACTTAAGCCATGTTCTGAAATCAAATGCAGAAAAAATGCCTTGGAATGAGATTCAAAAAATCTTGCAAAAATATGCGAATGTTGAAAATGAATATGGCAGCGGTTTTTACCATGTGGCACGAATTAAACAATGGTTACGTTATTTGAATAAGGAATATGATGAGGCGAACCAAGAGTTTGATAAGATTAAGACTTGCCAAACTGCTGAAGATTTGAAATTACGGTTAAATGATAAATAAAAAACCTGCTAATCAGCAGGTTTTCTTTTTCTAAATTATTTAAAAATTCACC&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1856176
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="template-for-handling-fasta-and-fastq-with-screed">
+<h2>Template for Handling FASTA and FASTQ with Screed<a class="headerlink" href="#template-for-handling-fasta-and-fastq-with-screed" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">screed</span> <span class="c1"># A Python library for reading FASTA and FASQ file format.</span>
+<span class="k">def</span> <span class="nf">readFastaFile</span><span class="p">(</span><span class="n">inputfile</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads and returns file as FASTA format with special characters removed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">screed</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">inputfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">seqfile</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">seqfile</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">sequence</span>
+    <span class="k">return</span> <span class="n">seq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># read data </span>
+<span class="n">seqs</span> <span class="o">=</span> <span class="n">readFastaFile</span><span class="p">(</span><span class="s2">&quot;../data/Haemophilus_influenzae.fasta&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;AACCGAAATTACAGTGCATGGACGCACAAAATCTGATGGTTATCGTGCTGATAGAATTAATTGGAAAAAAATTGGTAAAGTCCGAGAGCGTTTATCCATTCCTGTTATTGCTAACGGAGAAATTTGGCATTGGCAAGATGGTCAAGATTGCTTATCTCAAACAGGTTGTCAGGATTTAATGGTGGGACGAGGTGCATTGA&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">screed</span> <span class="c1"># A Python library for reading FASTA and FASQ file format.</span>
+<span class="k">def</span> <span class="nf">readFastqFile</span><span class="p">(</span><span class="n">inputfile</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads and returns file as FASTA format with special characters removed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">screed</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">inputfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">seqfile</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">read</span> <span class="ow">in</span> <span class="n">seqfile</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">=</span> <span class="n">read</span><span class="o">.</span><span class="n">sequence</span>
+    <span class="k">return</span> <span class="n">seq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span> <span class="o">=</span> <span class="n">readFastqFile</span><span class="p">(</span><span class="s2">&quot;../data/SRR835775_1.first1000.fastq&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seqs</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;GTTGGCTGCCCCTGCAGGTCCCTGTCACCTCTCACATGTCCCTGCCTAATCTTGCAGGTCCCAGAGAACTACTTCTATGTGCCAGACCTGGGCCAGGTGC&#39;
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
@@ -332,6 +434,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="05-Working with FASTQ Sequence Data.html" title="previous page">Working with <code class="docutils literal notranslate"><span class="pre">FASTQ</span></code> Sequence</a>
+    <a class='right-next' id="next-link" href="07-DNA Sequence Statistics.html" title="next page">DNA Sequence Statistics-I</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
